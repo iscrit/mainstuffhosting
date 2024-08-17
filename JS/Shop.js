@@ -57,29 +57,34 @@ setupPopup(
 // =====================
 
 function addToCart(item) {
-    const cart = localStorage.getItem('cart');
-    if(cart) {
-        const cartObj = JSON.parse(cart);
-        if(!cartObj.includes(item)) {
-            cartObj.push(item);
-            localStorage.setItem('cart', JSON.stringify(cartObj));
-        }
-    } else {
-        localStorage.setItem('cart', JSON.stringify([item]));
-    }
+  const cart = localStorage.getItem('cart');
+  if (cart) {
+      const cartObj = JSON.parse(cart);
+      if (!cartObj.includes(item)) {
+          cartObj.push(item);
+          localStorage.setItem('cart', JSON.stringify(cartObj));
+      }
+  } else {
+      localStorage.setItem('cart', JSON.stringify([item]));
+  }
 }
 
 function buyItem(button, item) {
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-        addToCart(item);
-        const successPopup = document.getElementById('success-add');
-        successPopup.classList.add('active');
-        setTimeout(() => {
-            successPopup.classList.remove('active');
-        }, 4000);
-    });
+  button.addEventListener('click', (event) => {
+      event.preventDefault();
+      addToCart(item);
+
+      const successPopup = document.getElementById('success-add');
+      successPopup.textContent = "You are being redirected to billing";
+      successPopup.classList.add('active');
+
+      setTimeout(() => {
+          successPopup.classList.remove('active');
+          window.location.href = "https://billing.hostfinder.top"; // Redirects to the billing page
+      }, 4000);
+  });
 }
+
 
 // BUY FOR ITEM SHOP 1
 buyItem(

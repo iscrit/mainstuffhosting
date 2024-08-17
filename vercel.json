@@ -1,0 +1,26 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/:path*.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*.html.html",
+      "destination": "/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/Errors/404.html",
+      "statusCode": 404
+    }
+  ],
+  "errorPages": [
+    {
+      "source": "/505",
+      "destination": "/Errors/505.html"
+    }
+  ]
+}
