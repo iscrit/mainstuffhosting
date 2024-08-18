@@ -1,68 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--=== Default tags ===-->
     <meta charset="UTF-8">
-    <title>Minecket - Minecraft Server</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Images/logo.webp" type="image/x-icon">
+    <title>FluxHosting - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
     <!--=== Social Profile ===-->
-    <meta property="og:title" content="HostFinder - Premium Minecraft Hosting">
+    <meta property="og:title" content="FluxHosting - Premium Minecraft Hosting">
     <meta property="og:description" content="Exceptional Minecraft hosting services starting at just $1.5 per GiG with outstanding performance and support.">
     <meta property="og:thumbnail" content="https://images.alphacoders.com/783/thumbbig-783153.webp">
 
     <!--== SEO ===-->
     <meta name="description" content="Top-tier Minecraft hosting at unbeatable prices. Enjoy high performance and reliability with our hosting services. Use code NEW21 for exclusive discounts.">
     <meta name="keywords" content="Minecraft hosting, affordable hosting, high performance Minecraft server, reliable Minecraft server, game server hosting">
-    <meta name="author" content="HostFinder Team">
+    <meta name="author" content="FluxHosting Team">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <link rel="canonical" href="https://store.hostfinder.top">
-</head>
 
-<!--=== Style ===-->
-<style>
-    #loading {
-     position: fixed;
-     z-index: 9999;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: #fff;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-    }
-    
-    .spinner {
-     width: 50px;
-     height: 50px;
-     border-radius: 50%;
-     border: 5px solid #ccc;
-     border-top-color: #333;
-     animation: spin 1s ease-in-out infinite
-    }
-    
-    @keyframes spin {
-        0% {transform: rotate(0deg);}
-        100% {transform: rotate(360deg);}
-    }
-
-</style>
-
-<!--=== Spinner ===-->
 <body>
-    <div id="loading">
-        <div class="spinner"></div>
-    </div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">FluxHosting</div>
+        <ul>
+            <li><a href="/index.html" class="nav-link">Home</a></li>
+            <li><a href="https://billing.hostfinder.top" class="nav-link">Billing Panel</a></li>
+            <li><a href="https://client.hostfinder.top" class="nav-link">Client panel</a></li>
+        </ul>
+    </nav>
 
-    <div id="error-message">
-        <h1>Reload the page!</h1>
-    </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>FluxHosting</h1>
+        <p>The most fluxable host, For big and small communitys.</p>
+        <a href="#products" class="cta">Get Started</a>
+    </header>
 
-    <script src="JS/Preview.js"></script>
+<!-- Products Section -->
+<section id="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+        <div class="product-card sold-out">
+            <img src="https://store.hostfinder.top/Images/bronze-rank.webp" alt="Free Hosting - FOREVER">
+            <h3>Free Hosting - FOREVER</h3>
+            <div class="product-details">
+                <p>▶ Limited support</p>
+                <p>▶ Cracked option</p>
+                <p>▶ Free proxy server</p>
+                <p>▶ Free bot hosting</p>
+                <p>▶ 0 Backups</p>
+                <p>▶ Limited options</p>
+                <p>▶ If you want to upgrade open a ticket, or visit your server panel to upgrade/downgrade.</p>
+            </div>
+            <a href="#" class="learn-more">SOLD OUT</a>
+        </div>
+        <div class="product-card">
+            <img src="https://store.hostfinder.top/Images/silver-rank.webp" alt="Silver Hosting - 9GB">
+            <h3>Silver Hosting - 9GB</h3>
+            <div class="product-details">
+                <p>▶ Great for medium-sized communities</p>
+                <p>▶ 9GB DDR4 RAM</p>
+                <p>▶ 60GB NVMe SSD</p>
+                <p>▶ 3 vCPU cores</p>
+                <p>▶ Good for <b>20+ players</b></p>
+                <p>▶ 1 backup</p>
+            </div>
+            <a href="/HTML/Cart.html" class="learn-more"><span>$6.00</span> Buy</a>
+        </div>
+        <div class="product-card best-seller">
+            <img src="https://store.hostfinder.top/Images/gold-rank.webp" alt="Gold Hosting - 10GB">
+            <div class="best-seller-tag">Best Seller</div>
+            <h3>Gold Hosting - 10GB</h3>
+            <div class="product-details">
+                <p>▶ Great for large communities</p>
+                <p>▶ 10GB DDR4 RAM</p>
+                <p>▶ 70GB NVMe SSD</p>
+                <p>▶ 1 backup</p>
+                <p>▶ Good for <b>30+ players</b></p>
+                <p>▶ 3.2 vCPU cores</p>
+            </div>
+            <a href="/HTML/Cart.html" class="learn-more"><span>$15.00</span> Buy</a>
+        </div>
+        <div class="product-card">
+            <img src="https://store.hostfinder.top/Images/cosmetics.webp" alt="Diamond Hosting - 14GB">
+            <h3>Diamond Hosting - 14GB</h3>
+            <div class="product-details">
+                <p>▶ Great for large communities</p>
+                <p>▶ 14GB DDR4 RAM</p>
+                <p>▶ 70GB NVMe SSD</p>
+                <p>▶ 4 backups</p>
+                <p>▶ Good for <b>45+ players</b></p>
+                <p>▶ 3.4 vCPU cores</p>
+            </div>
+            <a href="/HTML/Cart.html" class="learn-more"><span>$21.00</span> Buy</a>
+        </div>
+    </div>
+</section>
+<!-- Why Choose Us Section -->
+<section id="why-choose-us">
+    <h2>Why Choose FluxHosting?</h2>
+    <div class="why-choose-us-container">
+        <div class="benefit">
+            <h3>Top-of-the-Line Hardware</h3>
+            <p>We use only the best hardware to ensure superior performance and reliability. Our servers feature:</p>
+            <ul>
+                <li>Latest generation CPUs for unmatched processing power</li>
+                <li>High-speed DDR4 RAM for smooth operations</li>
+                <li>Lightning-fast NVMe SSDs for rapid data access</li>
+                <li>Redundant power supplies to keep your services running without interruptions</li>
+            </ul>
+        </div>
+        <div class="benefit">
+            <h3>Exceptional Uptime and Performance</h3>
+            <p>Experience near-perfect uptime and consistent performance with our top-tier infrastructure:</p>
+            <ul>
+                <li>99.884% uptime guarantee</li>
+                <li>Advanced DDoS protection to safeguard your server</li>
+                <li>Optimized network paths for faster data transmission</li>
+                <li>Regular performance monitoring and maintenance</li>
+            </ul>
+        </div>
+        <div class="benefit">
+            <h3>Unmatched Support and Flexibility</h3>
+            <p>Our team is dedicated to providing you with the best support and flexible solutions:</p>
+            <ul>
+                <li>24/7 customer support with knowledgeable staff</li>
+                <li>Easy upgrades and downgrades through our user-friendly panel</li>
+                <li>Comprehensive documentation and tutorials</li>
+                <li>Personalized support tailored to your specific needs</li>
+            </ul>
+        </div>
+        <div class="benefit">
+            <h3>Affordable Pricing with No Hidden Fees</h3>
+            <p>We offer transparent pricing with no hidden costs. Enjoy:</p>
+            <ul>
+                <li>Competitive rates starting at just $1.50 per GiB</li>
+                <li>Automated billing for convenience</li>
+                <li>No setup fees or unexpected charges</li>
+                <li>Cost-effective plans for both small and large projects</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Button with customizable link -->
+    <a href="#" id="cta-button" class="cta-button">Get Started with FluxHosting</a>
+</section>
+
+
+
+<!-- Ping Test Section -->
+<section id="ping-test">
+    <h2>Test Your Ping</h2>
+    <div class="ping-test-container">
+ <!--OST Widget code start--><div style="text-align:right;"><div style="min-height:360px;"><div style="width:100%;height:0;padding-bottom:50%;position:relative;"><iframe style="border:none;position:absolute;top:0;left:0;width:100%;height:100%;min-height:360px;border:none;overflow:hidden !important;" src="//openspeedtest.com/speedtest"></iframe></div></div>Provided by <a href="https://openspeedtest.com">OpenSpeedtest.com</a></div><!-- OST Widget code end -->
+    </div>
+</section>
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 FluxHosting. All rights reserved.</p>
+        </div>
+        <ul class="social-icons">
+            <li><a href="#" class="social-icon">FB</a></li>
+            <li><a href="#" class="social-icon">TW</a></li>
+            <li><a href="#" class="social-icon">IG</a></li>
+        </ul>
+        <div class="legal-info">
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
 </body>
+
+
 </html>
