@@ -44,7 +44,7 @@
         <div class="nav-list flex">
             <a class="nav-item-1" href="../HTML/Index.html"><span>Home</span></a> 
             <a class="nav-item-2" href="../HTML/Shop.html"><span>Shop</span></a>
-            <a class="nav-item-4" href="https://Discord.com"><span>Discord</span></a> 
+            <a class="nav-item-4" href="https://discord.gg/4ZqB8HMvPc"><span>Discord</span></a> 
         </div>
 
         <div class="flex">
@@ -78,7 +78,7 @@
         <div class="nav-mobile-menu flex">
             <a href="../HTML/Index.html"><span>Home</span></a> 
             <a href="../HTML/Shop.html"><span>Shop</span></a>
-            <a href="https://discord.com"><span>Discord</span></a> 
+            <a href="https://discord.gg/4ZqB8HMvPc"><span>Discord</span></a> 
             <a href="../HTML/Login.html"><span>Login</span></a>
             <a href="../HTML/Cart.html"><span>View cart</span></a>
         </div>
@@ -90,146 +90,143 @@
         <span>Your Ultimate Minecraft Hosting Solution</span>
     </header>
 
-    <!--=== Main content ===-->
-    <main class="main">
+      <!--=== Main content ===-->
+      <main class="main">
         <div class="container">
             <div class="main-title flex">
-                <img src="../Images/products.webp" alt="Image of box illustration">
-                <h1 class="m-desktop-title">Discover Our Hosting Plans</h1>
-                <h1 class="m-mobile-title">Our Hosting Plans</h1>
+                <img src="../Images/products.webp" alt="image of box illustration">
+                <h1 class="m-desktop-title">Products</h1>
+                <h1 class="m-mobile-title">Products</h1>
             </div>
             
             <div class="cards">
                 <div class="card">
-                    <img src="../Images/bronze-rank.webp" alt="Free Starter Plan">
+                    <img src="../Images/bronze-rank.webp" alt="Bronze VIP Illustration">
 
                     <div class="card-content">
-                        <h2>Free Starter Plan</h2>
+                        <h2>Free hosting - FOREVER</h2>
+                        <li>Limited support</li>
+                        <li>Cracked option</li>
+                        <li>Free proxy server</li>
+                        <li>Free bot hosting</li>
+                        <li>0 Backups</li>
+                        <li>Limited options</li>
+                        <li>If you want to upgrade open a ticket, or visit your server panel to upgrade/downgrade.</li>
                         <p>USD 0.00</p>
-                        <p>Test our services with zero risk and see the performance yourself!</p>
                     </div>
 
-                    <a class="btn btn-dark" href="../HTML/Shop.html">Get Started</a>
+                    <a class="btn btn-dark" href="/HTML/Cart.html" id="buy-item-4">Get</a>
                 </div>
     
                 <div class="card">
-                    <img src="../Images/silver-rank.webp" alt="Silver Hosting">
+                    <img src="../Images/silver-rank.webp" alt="Image of silver VIP">
 
                     <div class="card-content">
                         <h2>Silver Hosting - 9GB</h2>
-                        <p>USD 5.99</p>
-                        <p>Perfect for small servers and growing communities.</p>
+                        <li>Great for medium sized communites.</li>
+                        <li>9GB DDR4 Ram</li>
+                        <li>60GB NVMe SSD</li>
+                        <li>3 vCPU cores</li>
+                        <li>Good for <b>20+ players</b></li>
+                        <li>1 backups</li>
+                        <p><CENTER><b>$6.00/1.50 per GiG</b></CENTER></p>
+
+                        
                     </div>
 
-                    <a class="btn btn-dark" href="../HTML/Shop.html">Choose Plan</a>              
+                    <a class="btn btn-dark" href="/HTML/Cart.html" id="buy-item-4">Buy</a>
                 </div>
     
                 <div class="card">
-                    <img src="../Images/gold-rank.webp" alt="Gold Hosting">
+                    <img src="../Images/gold-rank.webp" alt="Image of gold VIP">
 
                     <div class="card-content">
                         <h2>Gold Hosting - 10GB</h2>
-                        <p>USD 15.00</p>
-                        <p>High performance for active servers and advanced gameplay.</p>
+                        <li>Great for large communites.</li>
+                        <li>10GB DDR4 Ram</li>
+                        <li>70GB NVMe SSD</li>
+                        <li>1 backups</li>
+                        <li>Good for <b>30+ players</b></li>
+                        <li>3.2 vCPU cores</li>
+                        <p><CENTER><b>$15.00/1.50 per GiG</b></CENTER></p>
                     </div>
 
-                    <a class="btn btn-dark" href="../HTML/Shop.html">Select Plan</a>     
+                    <a class="btn btn-dark" href="/HTML/Cart.html" id="buy-item-4">Buy</a>
                 </div>
                       
                 <div class="card card-cosmetics">
-                    <img src="../Images/cosmetics.webp" alt="Diamond Hosting">
+                    <img src="../Images/cosmetics.webp" alt="Image of cosmetics">
                     
                     <div class="card-content">
                         <h2>Diamond Hosting - 14GB</h2>
-                        <p>From USD 21.00</p>
-                        <p>For premium performance and large communities. Unmatched speed and reliability.</p>
+                        <li>Great for large communites.</li>
+                        <li>14GB DDR4 Ram</li>
+                        <li>70GB NVMe SSD</li>
+                        <li>4 backups</li>
+                        <li>Good for <b>45+ players</b></li>
+                        <li>3.4 vCPU cores</li>
+                        <p><CENTER><b>$21.00/1.50 per GiG</b></CENTER></p>
                     </div>
+
                     
-                    <a class="btn btn-dark" href="../HTML/Shop.html">Get Diamond Plan</a>  
+                    <a class="btn btn-dark" href="/HTML/Cart.html" id="buy-item-4">Buy</a>
                 </div>
             </div>
         </div>
     </main>
+
+    <!--=== Popups Overlay ===-->
+    <div class="overlay" id="overlay"></div>
+
     
-    <!--=== Play Section ===-->
-    <section class="play">
-        <div class="play-content flex">
-            <div class="play-images play-img-1">
-                <img src="../Images/steve-default.webp" alt="Image of Steve and Alex">
+    <!--=== Features Section ===-->
+    <section class="features-section">
+        <h1 class="features-title">Our Key Features</h1>
+        <p class="features-description">
+            Discover the powerful features that make HostFinder the best choice for your Minecraft server hosting needs.
+        </p>
+        <div class="features-container">
+            <div class="feature-card">
+                <img src="https://cdn.prod.website-files.com/661bfcfd7a14900ef3a20e61/661bfcfd7a14900ef3a20f24_bx-check-shield.svg" alt="Advanced Security" class="feature-icon">
+                <h2 class="feature-title">Advanced Security</h2>
+                <p class="feature-description">Our hosting includes advanced security features to protect your server from potential threats.</p>
             </div>
-
-            <div class="play-text">
-                <h1>Exclusive Offer: Free CREDITS!</h1>
-                <p>Use the code NEW23 to receive $3 store credit. Start your Minecraft adventure with added value!</p>
-                <a class="btn btn-success" id="copy-btn">Copy Code</a>
-                <span class="play-copy-alert" id="play-copy-alert">Code copied!</span>
+            <div class="feature-card">
+                <img src="https://cdn.prod.website-files.com/661bfcfd7a14900ef3a20e61/661bfcfd7a14900ef3a20f21_bx-tachometer.svg" alt="Top Performance" class="feature-icon">
+                <h2 class="feature-title">Top Performance</h2>
+                <p class="feature-description">Our servers use the latest high-performance CPUs, DDR4 RAM, and NVMe SSD storage to ensure your server runs smoothly with minimal latency.</p>
             </div>
-
-            <div class="play-images play-img-2">
-                <img src="../Images/steve-swords.webp" alt="Image of Steve and Alex">
+            <div class="feature-card">
+                <img src="https://cdn.prod.website-files.com/661bfcfd7a14900ef3a20e61/661bfcfd7a14900ef3a20f22_bx-rocket.svg" alt="99.99% Uptime" class="feature-icon">
+                <h2 class="feature-title">99.99% Uptime</h2>
+                <p class="feature-description">Our servers guarantee 99.99% uptime so you can play without interruptions.</p>
             </div>
-        </div>
-    </section>
-
-    <!--=== News Section ===-->
-    <section class="news">
-        <div class="container">
-            <div class="news-title flex">
-                <img src="../Images/news.webp" alt="Image of a box">
-
-                <div class="news-title-content">
-                    <h1>Latest Updates</h1>
-                    <span>Stay informed with our latest news!</span>                    
-                </div>
-            </div>
-        
-            <div class="news-containers">
-                <div class="news-container news-primary">
-                    <div class="news-item">
-                        <div class="news-item-title flex">
-                            <img src="" alt="">
-        
-                            <div class="news-title-text">
-                                <h1>Free Servers</h1>
-                                <span>• 8/14/24</span>
-                            </div>
-                        </div>
-        
-                        <div class="news-item-content">
-                            <p class="news-item-content-description">
-                               We're offering a free server to help you experience our top-tier hosting. <b>Limited time offer</b>!
-                            </p>
-
-                            <a class="news-btn btn-success" href="../HTML/News.html">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="news-container news-secondary">
-                    <div class="news-item">
-                        <div class="news-item-title flex">
-                            <img src="" alt="">
-        
-                            <div class="news-title-text">
-                                <h1>New Server Locations</h1>
-                                <span>• 8/16/24</span>
-                            </div>
-                        </div>
-        
-                        <div class="news-item-content">
-                            <p class="news-item-content-description">
-                               We've expanded to Germany, offering you even more options for high-speed hosting. <b>Check out our new locations</b>!
-                            </p>
-
-                            <a class="news-btn btn-success" href="../HTML/Shop.html">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-        
+            <div class="feature-card">
+                <img src="https://cdn.prod.website-files.com/661bfcfd7a14900ef3a20e61/661bfcfd7a14900ef3a20f23_bx-support.svg" alt="24/7 Support" class="feature-icon">
+                <h2 class="feature-title">24/7 Support</h2>
+                <p class="feature-description">Our dedicated support team is available around the clock to assist you with any issues or questions you may have.</p>
             </div>
         </div>
     </section>
 
+    <!--=== Testimonials Section ===-->
+    <section class="testimonials-section">
+        <h1 class="testimonials-title">What Our Customers Say</h1>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"HostFinder provides the best hosting experience I've ever had. The performance is incredible, and their support team is always there when I need them."</p>
+                <p class="testimonial-author">- Alex D.</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I switched to HostFinder from another provider, and the difference is night and day. My server runs faster, and I haven't experienced any downtime since."</p>
+                <p class="testimonial-author">- Jessica W.</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As a server owner, I need reliable hosting. HostFinder delivers on every promise, and I couldn't be happier with their service."</p>
+                <p class="testimonial-author">- Michael B.</p>
+            </div>
+        </div>
+    </section>
     <!--=== Footer Section ===-->
     <footer class="footer">
         <div class="footer-container flex">
@@ -246,7 +243,7 @@
             </div>
     
             <div class="footer-socials flex">
-                <a href="https://discord.com" title="Discord"><img class="discord-social" src="../Images/discord.webp" alt="Discord logo" width="40px" height="40px"></a>
+                <a href="https://discord.gg/4ZqB8HMvPc" title="Discord"><img class="discord-social" src="../Images/discord.webp" alt="Discord logo" width="40px" height="40px"></a>
                 <a href="https://twitter.com" title="Twitter"><img class="twitter-social" src="../Images/twitter.webp" alt="Twitter logo" width="40px" height="40px"></a>
                 <a href="https://youtube.com" title="YouTube"><img class="yt-social" src="../Images/youtube.webp" alt="YouTube logo" width="40px" height="40px"></a>
             </div>

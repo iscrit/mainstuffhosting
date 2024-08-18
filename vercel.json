@@ -1,15 +1,16 @@
 {
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "/:path*.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*.html.html",
-      "destination": "/:path*.html",
-      "permanent": false
-    }
-  ]
-}
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "destination": "/:path*.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/:path*.html.html",
+        "destination": "/:path*.html",
+        "permanent": false
+      }
+    ]
+  }
+  

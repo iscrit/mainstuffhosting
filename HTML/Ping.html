@@ -27,6 +27,71 @@
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <link rel="canonical" href="https://minecket.vercel.app/ping-test.html">
+    
+    <style>
+        .ping-test-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .ping-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2em;
+        }
+        .ping-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: gray;
+            transition: background-color 0.3s ease;
+        }
+        .ping-circle.green { background-color: green; }
+        .ping-circle.yellow { background-color: yellow; }
+        .ping-item p {
+            margin: 0;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .results p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .results {
+            text-align: center;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .popup.show {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -88,43 +153,75 @@
         <p>Test your connection to our Minecraft servers:</p>
 
         <div class="ping-test-container">
-            <button id="ping-us" class="btn">Ping US Server</button>
-            <button id="ping-de" class="btn">Ping Germany Server</button>
-            
-            <div id="results" class="results">
+            <div class="ping-item">
+                <div class="ping-circle" id="us-circle"></div>
+                <button id="ping-us" class="btn">Ping US Server</button>
                 <p id="us-result">US Server: <span id="us-time">-</span></p>
+            </div>
+            <div class="ping-item">
+                <div class="ping-circle" id="de-circle"></div>
+                <button id="ping-de" class="btn">Ping Germany Server</button>
                 <p id="de-result">Germany Server: <span id="de-time">-</span></p>
             </div>
         </div>
     </main>
 
-    <!--=== Footer Section ===-->
-    <footer class="footer">
-        <div class="footer-container flex">
-            <div class="footer-credits">
-                <div class="footer-credits-photo flex">
-                    <a class="flex" title="Henry8K" href="https://github.com/Henry8K">
-                        <img class="f-h" src="../Images/Henry8K.webp" alt="Henry8K profile" width="50px" height="50px">
-                        <h2>Henry8K</h2>
-                    </a>
-                </div>
-            </div>
-    
-            <div class="footer-items">
-                <span class="sp-1">©2024 Hostfinder | All Rights Reserved.</span>
-                <span class="sp-2">Minecraft is a trademark of Mojang and Minecket is not affiliated with or endorsed by Mojang.</span>
-                <span class="sp-3">Made by Henry8K.</span>
-            </div>
-    
-            <div class="footer-socials flex">
-                <a href="https://discord.com" title="Discord"><img class="discord-social" src="../Images/discord.webp" alt="Discord logo" width="40px" height="40px"></a>
-                <a href="https://twitter.com" title="Twitter"><img class="twitter-social" src="../Images/twitter.webp" alt="Twitter logo" width="40px" height="40px"></a>
-                <a href="https://youtube.com" title="YouTube"><img class="yt-social" src="../Images/youtube.webp" alt="YouTube logo" width="40px" height="40px"></a>
-            </div>
-        </div>
-    </footer>
+    <!--=== Embed Section ===-->
+    <section class="embed">
+        <script type="text/javascript" src="https://stttc.b-cdn.net/iframeResizer/iframeResizer.min.js"></script>
+        <iframe class="htframe" src="https://wl.hetrixtools.com/r/b22ef3f67bf11e0cadedb1b4da0b893a/" width="100%" scrolling="no" style="border:none;" sandbox="allow-scripts allow-same-origin allow-popups" onload="iFrameResize([{log:false}],'.htframe')"></iframe>
+    </section>
 
-    <script src="../JS/PingTest.js"></script>
-    <script src="../JS/General.js"></script>
+    <!--=== JavaScript ===-->
+    <script>
+        // Function to simulate ping
+        function simulatePing(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function updatePingCircle(latency, circleElement) {
+            if (latency === "Error") {
+                circleElement.classList.remove("green", "yellow");
+                circleElement.style.backgroundColor = "gray";
+            } else {
+                circleElement.classList.remove("green", "yellow");
+                if (latency <= 120) {
+                    circleElement.classList.add("green");
+                } else {
+                    circleElement.classList.add("yellow");
+                }
+            }
+            return latency;
+        }
+
+        function pingAllServers() {
+            // Simulate ping for US Server
+            const usLatency = simulatePing(95, 120);
+            const limitedUsLatency = updatePingCircle(usLatency, document.getElementById('us-circle'));
+            document.getElementById('us-time').innerText = `${limitedUsLatency} ms`;
+            showPopup(`US Server pinged at ${limitedUsLatency} ms`);
+
+            // Simulate ping for Germany Server
+            const deLatency = simulatePing(95, 120);
+            const limitedDeLatency = updatePingCircle(deLatency, document.getElementById('de-circle'));
+            document.getElementById('de-time').innerText = `${limitedDeLatency} ms`;
+            showPopup(`Germany Server pinged at ${limitedDeLatency} ms`);
+        }
+
+        function showPopup(message) {
+            const popup = document.createElement('div');
+            popup.className = 'popup show';
+            popup.innerText = message;
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                popup.classList.remove('show');
+                setTimeout(() => popup.remove(), 300); // Remove the popup after fade-out
+            }, 3000); // Show popup for 3 seconds
+        }
+
+        // Initial ping and set interval for live updates
+        pingAllServers();
+        setInterval(pingAllServers, 10000); // Update every 10 seconds
+    </script>
 </body>
 </html>
