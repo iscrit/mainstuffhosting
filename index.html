@@ -23,19 +23,26 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav>
-        <div class="logo">FluxHosting</div>
-        <ul>
-            <li><a href="/index.html" class="nav-link">Home</a></li>
-            <li><a href="https://billing.hostfinder.top" class="nav-link">Billing Panel</a></li>
-            <li><a href="https://client.hostfinder.top" class="nav-link">Client panel</a></li>
-        </ul>
-    </nav>
+<!-- Navigation Bar -->
+<nav>
+    <div class="logo">FluxHosting</div>
+    <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>        
+        <li><a href="https://fluxnode.hostfinder.top/register" class="nav-link">Billing (Main page)</a></li>
+        <li><a href="https://client.hostfinder.top" class="nav-link">Panel</a></li>
+    </ul>
+</nav>
+
+<script src="https://hostfinder.instatus.com/en/b7cd0f3c/widget/script.js">
+</script>
+</div>
+
+
 
     <!-- Hero Section -->
     <header class="hero">
         <h1>FluxHosting</h1>
-        <p>The most fluxable host, For big and small communitys.</p>
+        <p>The most fluxable host, at $1.50 per GiG! Great for big and small servers.</p>
         <a href="#products" class="cta">Get Started</a>
     </header>
 
@@ -43,7 +50,7 @@
 <section id="products">
     <h2>Our Products</h2>
     <div class="product-grid">
-        <div class="product-card sold-out">
+        <div class="product-card">
             <img src="https://store.hostfinder.top/Images/bronze-rank.webp" alt="Free Hosting - FOREVER">
             <h3>Free Hosting - FOREVER</h3>
             <div class="product-details">
@@ -55,7 +62,7 @@
                 <p>▶ Limited options</p>
                 <p>▶ If you want to upgrade open a ticket, or visit your server panel to upgrade/downgrade.</p>
             </div>
-            <a href="#" class="learn-more">SOLD OUT</a>
+            <a href="#" class="learn-more sold-out">$0.00</a>
         </div>
         <div class="product-card">
             <img src="https://store.hostfinder.top/Images/silver-rank.webp" alt="Silver Hosting - 9GB">
@@ -99,11 +106,21 @@
         </div>
     </div>
 </section>
+
 <!-- Why Choose Us Section -->
 <section id="why-choose-us">
     <h2>Why Choose FluxHosting?</h2>
+    <div class="battery-container">
+        <span class="battery-emoji">🔋</span>
+        <p class="battery-text">Performance</p>
+        <!-- Connecting Lines -->
+        <div class="line" id="line-1"></div>
+        <div class="line" id="line-2"></div>
+        <div class="line" id="line-3"></div>
+        <div class="line" id="line-4"></div>
+    </div>
     <div class="why-choose-us-container">
-        <div class="benefit">
+        <div class="benefit" id="benefit-1">
             <h3>Top-of-the-Line Hardware</h3>
             <p>We use only the best hardware to ensure superior performance and reliability. Our servers feature:</p>
             <ul>
@@ -113,7 +130,7 @@
                 <li>Redundant power supplies to keep your services running without interruptions</li>
             </ul>
         </div>
-        <div class="benefit">
+        <div class="benefit" id="benefit-2">
             <h3>Exceptional Uptime and Performance</h3>
             <p>Experience near-perfect uptime and consistent performance with our top-tier infrastructure:</p>
             <ul>
@@ -123,7 +140,7 @@
                 <li>Regular performance monitoring and maintenance</li>
             </ul>
         </div>
-        <div class="benefit">
+        <div class="benefit" id="benefit-3">
             <h3>Unmatched Support and Flexibility</h3>
             <p>Our team is dedicated to providing you with the best support and flexible solutions:</p>
             <ul>
@@ -133,7 +150,7 @@
                 <li>Personalized support tailored to your specific needs</li>
             </ul>
         </div>
-        <div class="benefit">
+        <div class="benefit" id="benefit-4">
             <h3>Affordable Pricing with No Hidden Fees</h3>
             <p>We offer transparent pricing with no hidden costs. Enjoy:</p>
             <ul>
@@ -147,6 +164,171 @@
     <!-- Button with customizable link -->
     <a href="#" id="cta-button" class="cta-button">Get Started with FluxHosting</a>
 </section>
+
+
+<section id="server-simulation">
+    <h2>Server Simulation</h2>
+    <div class="slider-container">
+        <div class="slider-label">RAM (GB): <span id="live-ram">8</span></div>
+        <input type="range" id="ram-slider" class="slider" min="1" max="64" value="8">
+    </div>
+    <div class="slider-container">
+        <div class="slider-label">CPU Usage (%): <span id="live-cpu">50</span></div>
+        <input type="range" id="cpu-slider" class="slider" min="1" max="100" value="50">
+    </div>
+    <div class="slider-container">
+        <div class="slider-label">Number of Players: <span id="player-count">1</span></div>
+        <input type="range" id="players-slider" class="slider" min="1" max="100" value="1">
+    </div>
+    <div class="slider-container">
+        <div class="slider-label">Simulation Duration (seconds): <input type="number" id="duration" min="1" value="10"></div>
+    </div>
+    <div class="live-stats">
+        <button id="start-button" class="button">Start Simulation</button>
+        <button id="fastforward-button" class="button">Fast Forward</button>
+        <button id="end-button" class="button">End Simulation</button>
+    </div>
+    <div class="live-stats">
+        <div>Live RAM Usage: <span id="current-ram">0</span> / <span id="max-ram">0</span> GB</div>
+        <div>Live CPU Usage: <span id="current-cpu">0</span> / <span id="max-cpu">0</span> %</div>
+        <div>Current Player Count: <span id="current-player-count">0</span></div>
+    </div>
+    <div id="console" class="console-output">
+        Simulation Console
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ramSlider = document.getElementById('ram-slider');
+        const cpuSlider = document.getElementById('cpu-slider');
+        const playersSlider = document.getElementById('players-slider');
+        const durationInput = document.getElementById('duration');
+        const liveRam = document.getElementById('live-ram');
+        const liveCpu = document.getElementById('live-cpu');
+        const playerCount = document.getElementById('player-count');
+        const maxRamDisplay = document.getElementById('max-ram');
+        const maxCpuDisplay = document.getElementById('max-cpu');
+        const currentRamDisplay = document.getElementById('current-ram');
+        const currentCpuDisplay = document.getElementById('current-cpu');
+        const currentPlayerCountDisplay = document.getElementById('current-player-count');
+        const consoleOutput = document.getElementById('console');
+        const startButton = document.getElementById('start-button');
+        const fastForwardButton = document.getElementById('fastforward-button');
+        const endButton = document.getElementById('end-button');
+
+        let simulationRunning = false;
+        let simulationInterval;
+        let leaveInterval;
+        let playerCountValue = 0;
+        let startTime;
+
+        function updateLiveStats() {
+            const ramValue = ramSlider.value;
+            const cpuValue = cpuSlider.value;
+            const playerValue = playersSlider.value;
+
+            liveRam.textContent = ramValue;
+            liveCpu.textContent = cpuValue;
+            playerCount.textContent = playerValue;
+
+            maxRamDisplay.textContent = `${ramValue} GB`;
+            maxCpuDisplay.textContent = `${cpuValue} %`;
+        }
+
+        function updateUsage() {
+            if (!simulationRunning) return;
+
+            const maxRam = parseInt(ramSlider.value, 10) * 1024; // Convert GB to MB
+            const currentRam = Math.min(maxRam, playerCountValue * 200); // Each player uses 200 MB
+            const cpuValue = cpuSlider.value;
+
+            currentRamDisplay.textContent = `${(currentRam / 1024).toFixed(1)} GB`;
+            currentCpuDisplay.textContent = cpuValue;
+            currentPlayerCountDisplay.textContent = playerCountValue;
+        }
+
+        function simulatePlayerActivity() {
+            if (!simulationRunning) return;
+
+            const maxPlayers = parseInt(playersSlider.value, 10);
+            if (playerCountValue < maxPlayers) {
+                playerCountValue++;
+                consoleOutput.innerHTML += `<br><span style="color: #00FF00">[${new Date().toLocaleTimeString()}]</span> ${playerCountValue} player${playerCountValue > 1 ? 's' : ''} joined.`;
+            }
+
+            updateUsage();
+        }
+
+        function simulatePlayerLeave() {
+            if (!simulationRunning) return;
+
+            if (playerCountValue > 0) {
+                playerCountValue--;
+                consoleOutput.innerHTML += `<br><span style="color: #FF0000">[${new Date().toLocaleTimeString()}]</span> ${playerCountValue + 1} player${playerCountValue > 1 ? 's' : ''} left.`;
+            }
+
+            updateUsage();
+        }
+
+        function startSimulation() {
+            if (simulationRunning) return;
+
+            simulationRunning = true;
+            consoleOutput.innerHTML = '<span style="color: #00FF00">Simulation started.</span>';
+            startTime = Date.now();
+
+            updateLiveStats();
+            simulationInterval = setInterval(simulatePlayerActivity, 1000); // Simulate player join every second
+
+            leaveInterval = setInterval(simulatePlayerLeave, 15000); // Simulate player leave every 15 seconds
+
+            const duration = parseInt(durationInput.value, 10) * 1000; // Convert to milliseconds
+            setTimeout(() => {
+                if (simulationRunning) endSimulation();
+            }, duration);
+        }
+
+        function fastForwardSimulation() {
+            if (!simulationRunning) return;
+
+            clearInterval(simulationInterval);
+            simulatePlayerActivity(); // Simulate a join immediately
+            const duration = parseInt(durationInput.value, 10) * 1000; // Convert to milliseconds
+
+            simulationInterval = setInterval(() => {
+                if (Date.now() - startTime > duration) {
+                    endSimulation();
+                    return;
+                }
+                simulatePlayerActivity();
+            }, 500); // Faster interval for fast forward
+        }
+
+        function endSimulation() {
+            if (!simulationRunning) return;
+
+            clearInterval(simulationInterval);
+            clearInterval(leaveInterval);
+            simulationRunning = false;
+            consoleOutput.innerHTML += '<br><span style="color: #FF0000">Simulation ended.</span>';
+        }
+
+        ramSlider.addEventListener('input', updateLiveStats);
+        cpuSlider.addEventListener('input', updateLiveStats);
+        playersSlider.addEventListener('input', updateLiveStats);
+        durationInput.addEventListener('input', updateLiveStats);
+
+        startButton.addEventListener('click', startSimulation);
+        fastForwardButton.addEventListener('click', fastForwardSimulation);
+        endButton.addEventListener('click', endSimulation);
+    });
+</script>
+
+
+
+
+
 
 
 
