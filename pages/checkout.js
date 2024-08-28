@@ -1,103 +1,105 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+const axios = require('axios');
 
-export default function Checkout() {
-    const router = useRouter();
-    const { product_id, name, price } = router.query;
+module.exports = async function (req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ message: 'Method Not Allowed' });
+    }
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [serverName, setServerName] = useState('');
-    const [egg, setEgg] = useState('default-egg-id');
-    const [ram, setRam] = useState(1024);
-    const [loading, setLoading] = useState(false);
+    const { product_id, name, price, email, password, serverName, egg, ram } = req.body;
 
-    const handleCheckout = async () => {
-        setLoading(true);
-
+    try {
+        // Fetch user or create user
+        let user;
         try {
-            const response = await fetch('/api/tebexCheckout', {
-                method: 'POST',
+            const userResponse = await axios.get(`https://client.hostfinder.top/api/application/users?filter[email]=${email}`, {
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    product_id,
-                    name,
-                    price,
-                    email,
-                    password,
-                    serverName,
-                    egg,
-                    ram
-                })
+                    'Authorization': `Bearer ${process.env.PTERODACTYL_API_KEY}`
+                }
             });
 
-            const data = await response.json();
+            user = userResponse.data.data[0];
 
-            if (data.success) {
-                window.location.href = data.payment_url;
-            } else {
-                alert('Something went wrong. Please try again.');
+            if (!user) {
+                const createUserResponse = await axios.post('https://client.hostfinder.top/api/application/users', {
+                    email,
+                    username: email.split('@')[0],
+                    first_name: 'FirstName',
+                    last_name: 'LastName',
+                    password
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PTERODACTYL_API_KEY}`
+                    }
+                });
+
+                user = createUserResponse.data;
             }
         } catch (error) {
-            console.error('Error during checkout:', error);
-            alert('Error during checkout. Please try again.');
+            console.error('Error fetching or creating user:', error.message);
+            return res.status(500).json({ success: false, message: 'Error creating or finding user' });
         }
 
-        setLoading(false);
-    };
+        // Create server
+        try {
+            await axios.post('https://client.hostfinder.top/api/application/servers', {
+                name: serverName,
+                user: user.attributes.id,
+                egg,
+                limits: {
+                    memory: ram,
+                    swap: 0,
+                    disk: 10240,
+                    io: 500,
+                    cpu: 100
+                },
+                feature_limits: {
+                    databases: 1,
+                    allocations: 1
+                },
+                environment: {},
+                startup: 'default_startup_command',
+                image: 'default_docker_image',
+                skip_scripts: false
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${process.env.PTERODACTYL_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            });
 
-    return (
-        <div className="container">
-            <h1>Checkout</h1>
-            <p>Product: {name}</p>
-            <p>Price: ${price}</p>
+            console.log(`Server created for user ${user.attributes.email}`);
+        } catch (error) {
+            console.error('Error creating server:', error.message);
+            return res.status(500).json({ success: false, message: 'Error creating server' });
+        }
 
-            <label>Email:</label>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-            />
+        // Tebex payment
+        try {
+            const tebexResponse = await axios.post('https://plugin.tebex.io/payments', {
+                buyer: {
+                    id: user.attributes.id,
+                    email
+                },
+                packages: [{ id: product_id, price }]
+            }, {
+                headers: {
+                    'X-Tebex-Secret': process.env.TEBEX_SECRET_KEY,
+                    'Content-Type': 'application/json'
+                }
+            });
 
-            <label>Password:</label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
+            if (tebexResponse.data.url) {
+                return res.status(200).json({ success: true, payment_url: tebexResponse.data.url });
+            } else {
+                return res.status(500).json({ success: false, message: 'Failed to create Tebex order' });
+            }
+        } catch (error) {
+            console.error('Error creating Tebex order:', error.message);
+            return res.status(500).json({ success: false, message: 'Error processing payment' });
+        }
 
-            <label>Server Name:</label>
-            <input
-                type="text"
-                value={serverName}
-                onChange={(e) => setServerName(e.target.value)}
-                required
-            />
-
-            <label>Egg:</label>
-            <select value={egg} onChange={(e) => setEgg(e.target.value)}>
-                <option value="default-egg-id">Default Egg</option>
-                <option value="egg-id-1">Egg 1</option>
-                <option value="egg-id-2">Egg 2</option>
-                {/* Add more eggs as needed */}
-            </select>
-
-            <label>RAM (MB):</label>
-            <input
-                type="number"
-                value={ram}
-                onChange={(e) => setRam(parseInt(e.target.value))}
-                required
-                min="512"
-            />
-
-            <button onClick={handleCheckout} disabled={loading}>
-                {loading ? 'Processing...' : 'Proceed to Payment'}
-            </button>
-        </div>
-    );
+    } catch (error) {
+        console.error('Error during checkout:', error.message);
+        return res.status(500).json({ success: false, message: 'Server creation or Tebex payment failed' });
+    }
 }
