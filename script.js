@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
+    window.onload = function() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    };
 
     // Smooth scrolling for review section
     const reviewCarousel = document.querySelector('.review-carousel');
