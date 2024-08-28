@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <form id="checkoutForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="serverName">Server Name:</label>
+                <input type="text" id="serverName" name="serverName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="egg">Egg:</label>
+                <select id="egg" name="egg">
+                    <option value="default-egg-id">Default Egg</option>
+                    <option value="egg-id-1">Egg 1</option>
+                    <option value="egg-id-2">Egg 2</option>
+                    <!-- Add more eggs as needed -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ram">RAM (MB):</label>
+                <input type="number" id="ram" name="ram" min="512" value="1024" required>
+            </div>
+
+            <button type="submit" id="checkoutButton">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('checkoutForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const serverName = document.getElementById('serverName').value;
+            const egg = document.getElementById('egg').value;
+            const ram = document.getElementById('ram').value;
+
+            document.getElementById('checkoutButton').disabled = true;
+            document.getElementById('checkoutButton').textContent = 'Processing...';
+
+            try {
+                const response = await fetch('/api/tebexCheckout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        serverName: serverName,
+                        egg: egg,
+                        ram: ram,
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = data.payment_url;
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error during checkout:', error);
+                alert('Error during checkout. Please try again.');
+            }
+
+            document.getElementById('checkoutButton').disabled = false;
+            document.getElementById('checkoutButton').textContent = 'Proceed to Payment';
+        });
+    </script>
+</body>
+</html>
